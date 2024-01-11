@@ -1,0 +1,46 @@
+# Create a resource group
+az group create --location eastus --name devopsmela-rg
+
+# Create an app service plan of type Linux
+az appservice plan create -g devopsmela-rg -n devopsmela-service-plan --is-linux
+
+# Create an App Service from the plan with Tomcat and JRE 8 as the runtime
+az webapp create -g devopsmela-rg -p devopsmela-service-plan -n devopsmela-dev --runtime "JAVA|8-jre8"
+
+# Delete resource group
+az group delete --name devopsmela-rg --yes
+
+# URL Access
+http://devopsmela-dev.azurewebsites.net/petclinic/
+
+Build Pipeline:
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**/*.war'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+    
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
