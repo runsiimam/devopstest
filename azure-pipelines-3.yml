@@ -9,7 +9,7 @@ stages:
   - stage: 'Junit'
     displayName: 'JUnit stage'
     jobs:
-      - job: 'Junit Tests'
+      - job: 'JunitTests'
         displayName: 'Running Unit Tests'
         steps:
           - script: echo 'Running Maven demo app'
