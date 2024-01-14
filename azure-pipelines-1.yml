@@ -9,6 +9,30 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+stages:
+  - stage: 'Junit Stage'
+    displayName: 'Junit stage'
+    jobs:
+      - job: 'JunitTest'
+        displayName: 'Running unit Tests'
+        steps:
+          - scripts: echo 'Running echo script'
+
+          - task: Maven@3
+            inputs:
+              mavenPomFile: 'pom.xml'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              testRunTitle: 'testmaven'
+              codeCoverageToolOption: 'JaCoCo'
+              javaHomeOption: 'JDKVersion'
+              mavenVersionOption: 'Default'
+              mavenAuthenticateFeed: false
+              effectivePomSkip: false
+              sonarQubeRunAnalysis: false
+              checkStyleRunAnalysis: true
+              pmdRunAnalysis: true
+
 steps:
 - script: echo Hello, India!
   displayName: 'Run a one-line script'
