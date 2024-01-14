@@ -35,7 +35,7 @@ stages:
 
         steps:
           - script: echo 'Hello, India!'
-             displayName: 'Run a one-line script'
+            displayName: 'Run a one-line script'
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
