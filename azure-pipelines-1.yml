@@ -33,8 +33,8 @@ stages:
               checkStyleRunAnalysis: true
               pmdRunAnalysis: true
 
-        steps:
-        - script: echo 'Hello, India!'
+        
+         - script: echo 'Hello, India!'
             displayName: 'Run a one-line script'
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
