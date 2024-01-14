@@ -37,9 +37,9 @@ stages:
   - stage: 'BuildArtifact'
     displayName: 'Building Artifact'
     jobs:
-      job: 'BuildArtifact'
-      displayName: 'Building Artifact'
-      steps:
+      - job: 'BuildArtifact'
+        displayName: 'Building Artifact'
+        steps:
         
           - task: Maven@3
             inputs:
