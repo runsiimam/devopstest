@@ -16,7 +16,7 @@ stages:
       - job: 'JunitTest'
         displayName: 'Running unit Tests'
         steps:
-          - scripts: echo 'Running echo script'
+          - script: echo 'Running echo script'
 
           - task: Maven@3
             inputs:
@@ -33,10 +33,10 @@ stages:
               checkStyleRunAnalysis: true
               pmdRunAnalysis: true
 
-steps:
-- script: echo Hello, India!
-  displayName: 'Run a one-line script'
-
+        steps:
+          - script: echo Hello, India!
+        displayName: 'Run a one-line script'
+    
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
