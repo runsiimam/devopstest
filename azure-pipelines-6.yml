@@ -7,7 +7,9 @@ trigger:
 - master
 
 pool:
-  name: IMAMAGENT
+  name: Default
+  demands:
+  - IMAMAGENT
 
 steps:
 - script: echo Hello, world!
