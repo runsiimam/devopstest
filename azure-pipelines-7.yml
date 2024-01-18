@@ -6,7 +6,9 @@
 trigger:
 - master
 
-pool: 'IMAMAGENT'
+pool: 
+  name: Default
+  demands: IMAMAGENT
    
 
 steps:
