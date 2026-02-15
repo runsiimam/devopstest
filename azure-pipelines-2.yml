@@ -30,3 +30,7 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
+    message: "Hello, World!"
+    details:
+      user: "Alice"
+      status: "active"
